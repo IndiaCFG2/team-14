@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+</form>
+
 <div style="width: 500px; height: 500px;">
 <canvas id="line-chart" width="1" height="1"></canvas>
 </div>
