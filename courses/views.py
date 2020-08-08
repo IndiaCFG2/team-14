@@ -27,7 +27,7 @@ def courseshome(request):
 				course = ca.objects.all()
 				messages.warning(request,'The data regarding selected filters is not available at the moment :(')
 
-			return render(request, 'dashboard/maindash.html', {'course':course, 'form':form})
+			return render(request, 'courses/coursesmain.html', {'course':course, 'form':form})
 
 		elif request.get('date')!=None and request.get('course')!=None and request.get('week')!=None:
 				date = request.get('date')
@@ -38,7 +38,7 @@ def courseshome(request):
 				except:
 					course = ca.objects.all()
 					messages.warning(request,'The data regarding selected filters is not available at the moment :(')
-				return render(request, 'dashboard/maindash.html', {'course':course, 'form':form})
+				return render(request, 'courses/coursesmain.html', {'course':course, 'form':form})
 
 		elif request.get('date')!=None and request.get('course')!=None :
 			date = request.get('date')
@@ -49,7 +49,7 @@ def courseshome(request):
 				course = ca.objects.all()
 				messages.warning(request,'The data regarding selected filters is not available at the moment :(')
 
-			return render(request, 'dashboard/maindash.html', {'course':course, 'form':form})
+			return render(request, 'courses/coursesmain.html', {'course':course, 'form':form})
 
 		elif request.get('course')!=None :
 			course_id = request.get('course')
@@ -59,9 +59,9 @@ def courseshome(request):
 				course = ca.objects.all()
 				messages.warning(request,'The data regarding selected filters is not available at the moment :(')
 
-			return render(request, 'dashboard/maindash.html', {'course':course, 'form':form})
+			return render(request, 'courses/coursesmain.html', {'course':course, 'form':form})
 		else :
 			messages.warning(request,'Please select applicable fields to show statistics')
-			return render(request, 'dashboard/maindash.html', {'course':course, 'form':form})
+			return render(request, 'courses/coursesmain.html', {'course':course, 'form':form})
     			
-	return render(request, 'dashboard/maindash.html', {'course':course, 'form':form})
+	return render(request, 'courses/coursesmain.html', {'course':course, 'form':form})
