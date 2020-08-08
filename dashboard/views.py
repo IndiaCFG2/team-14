@@ -13,3 +13,5 @@ def chart(request):
 
 	    return render(request, 'dashboard/maindash.html')
 
+def home(request):
+	return render(request, 'base.html', {})
