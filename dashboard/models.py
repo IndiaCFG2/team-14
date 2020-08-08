@@ -19,4 +19,3 @@ class Course_Analysis(models.Model):
 
     class Meta:
         unique_together = ('date', 'course','week','Dname')
-
