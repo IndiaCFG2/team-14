@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<body onload="getURL()">
+<script>
+    function getURL() {
+    	element = document.getElementById(linkid)
+        var windowlink = window.location.href; 
+        windowlink+='{{ a }}'
+        element.setAttribute(href, windowlink)
+        console.log(windowlink)
+    }
+</script>
+{% block filter %}
+<form method="POST" class="post-form">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default">Generate Token</button>
+      Please add the token to the end of url         
+      {{ a }}
+      <!-- <button type="button" class="save btn btn-default" onclick="getURL()">OpenLink</button> -->
+</form>
+{% endblock %}
+
