@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<h2><a class="article-title" href="#">COURSES ANALYSIS</a></h2>
+{% endblock %}
+{% block heading  %}
+
+          {% endblock %}
 
 {% block filter %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <form method="post">
   {% csrf_token %}
-  {{ form }}
+  {{ form|crispy }}
+  <input type="submit" value="Filter" class="btn btn-warning">
 </form>
+{% endblock %}
+{% block ranking_heading %}
+<h3>Top Ranked Courses</h3>
 {% endblock %}
 
 {% block body %}
@@ -14,41 +32,25 @@
 
 <script>
 new Chart(document.getElementById("line-chart"), {
-    type: 'line',
+    
+    type: 'bar',
     data: {
-      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-      datasets: [{ 
-          data: [86,114,106,106,107,111,133,221,783,2478],
-          label: "Africa",
-          borderColor: "#3e95cd",
-          fill: false
-        }, { 
-          data: [282,350,411,502,635,809,947,1402,3700,5267],
-          label: "Asia",
-          borderColor: "#8e5ea2",
-          fill: false
-        }, { 
-          data: [168,170,178,190,203,276,408,547,675,734],
-          label: "Europe",
-          borderColor: "#3cba9f",
-          fill: false
-        }, { 
-          data: [40,20,10,16,24,38,74,167,508,784],
-          label: "Latin America",
-          borderColor: "#e8c3b9",
-          fill: false
-        }, { 
-          data: [6,3,2,2,7,26,82,172,312,433],
-          label: "North America",
-          borderColor: "#c45850",
-          fill: false
-        }
-      ]
+      
+      datasets: [
+        { 
+          backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',],
+          data: ['{{cc.count}}'],
+          label: "{{cc.course.course_name}}",
+          borderColor: "#00000",
+          fill: true
+        },
+] 
     },
     options: {
       title: {
         display: true,
-        text: 'World population per region (in millions)',
+        text: 'Number of times '+'{{ cc.course.course_name }}'+' course is accessed',
         responsive: true,
         maintainAspectRatio: false
 

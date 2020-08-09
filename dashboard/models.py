@@ -9,6 +9,9 @@ class School_Analysis(models.Model):
     class Meta:
         unique_together = ('date', 'school')
 
+    def __str__(self):
+        return self.school.school_name
+
 
 class Course_Analysis(models.Model):
     date = models.DateField()
@@ -19,3 +22,6 @@ class Course_Analysis(models.Model):
 
     class Meta:
         unique_together = ('date', 'course','week','Dname')
+
+    def __str__(self):
+        return str(self.count)

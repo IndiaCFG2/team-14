@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block filter %}
+<form method="post" >
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="submit"/>
+</form>
+{% endblock %}
+
+<!-- <div style="width: 500px; height: 500px;">
+<canvas id="line-chart" width="1" height="1"></canvas>
+</div> -->
+{% block body %}
+ <div style="width: 500px; height: 500px;">
+    <canvas id="pie-chart"></canvas>
+ </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script>
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: [{% for x in school %}'{{x.count}}',{% endfor %}],
+          backgroundColor: [
+            '#ff0000', '#0000ff', '#ff0080', '#73ffff', '#5c26ff', '#002db3', '#ffff26', '#4cff4c', '#ff00ff'
+          ],
+          label: 'mnbv'
+        }],
+        labels: [{% for x in school %}'{{x.date}}',{% endfor %}]
+      },
+      options: {
+        responsive: true
+      }
+    };
+ 
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+  </script>
+{% endblock %}
